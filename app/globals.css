@@ -132,3 +132,33 @@ h1, h2, h3, h4, h5, h6 {
     animation: logo-spin infinite 20s linear;
   }
 }
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fadeUp 0.6s ease 0.1s forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fadeUp 0.6s ease 0.2s forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-3 {
+  animation: fadeUp 0.6s ease 0.3s forwards;
+  opacity: 0;
+}
