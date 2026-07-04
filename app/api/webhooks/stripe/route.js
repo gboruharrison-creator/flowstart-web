@@ -1,4 +1,4 @@
-import { stripe } from '../../../../lib/stripe'
+import { getStripe } from '../../../../lib/stripe'
 import { createClient } from '@supabase/supabase-js'
 
 export async function POST(request) {
@@ -11,7 +11,7 @@ export async function POST(request) {
 
   let event
   try {
-    event = stripe.webhooks.constructEvent(
+    event = getStripe().webhooks.constructEvent(
       body,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET
@@ -34,7 +34,7 @@ export async function POST(request) {
         const supabaseUserId = session.metadata?.supabase_user_id
         const plan = session.metadata?.plan || 'starter'
 
-        const customer = await stripe.customers.retrieve(customerId)
+        const customer = await getStripe().customers.retrieve(customerId)
 
         const { data: tenant, error: tenantError } = await supabaseAdmin
           .from('tenants')

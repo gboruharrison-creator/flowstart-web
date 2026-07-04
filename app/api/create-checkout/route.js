@@ -1,4 +1,4 @@
-import { stripe } from '../../../lib/stripe'
+import { getStripe } from '../../../lib/stripe'
 import { createClient } from '../../../lib/supabase/server'
 
 export async function POST(request) {
@@ -17,9 +17,9 @@ export async function POST(request) {
 
     if (user?.email) customerData.email = user.email
 
-    const customer = await stripe.customers.create(customerData)
+    const customer = await getStripe().customers.create(customerData)
 
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       customer: customer.id,
       payment_method_types: ['card'],
       line_items: [{ price: priceId, quantity: 1 }],
