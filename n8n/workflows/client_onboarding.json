@@ -1,0 +1,207 @@
+{
+  "name": "Flowstart AI — Client Onboarding",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "onboarding",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.body.event }}",
+              "rightValue": "new_client_onboarding",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ]
+        }
+      },
+      "id": "check-event",
+      "name": "Check Event Type",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.OPENAI_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "model",
+              "value": "gpt-4o"
+            },
+            {
+              "name": "messages",
+              "value": "=[{\"role\":\"system\",\"content\":\"You are an expert at writing AI voice agent system prompts in Italian for business automation. Write natural, professional Italian.\"},{\"role\":\"user\",\"content\":\"Write a complete VAPI voice agent system prompt in Italian for this business:\\n\\nBusiness name: {{ $('Webhook Trigger').item.json.body.business_name }}\\nIndustry: {{ $('Webhook Trigger').item.json.body.plan }}\\nAgent name: Sofia\\n\\nThe agent must:\\n1. Answer calls professionally in Italian\\n2. Book appointments and check availability\\n3. Answer FAQs about the business\\n4. Reactivate inactive clients\\n5. Escalate complex issues to a human\\n\\nReturn ONLY the system prompt text, nothing else.\"}]"
+            },
+            {
+              "name": "max_tokens",
+              "value": "=1000"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "generate-prompt",
+      "name": "Generate VAPI Prompt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.vapi.ai/assistant",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.VAPI_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"name\": \"Sofia - {{ $('Webhook Trigger').item.json.body.business_name }}\",\n  \"model\": {\n    \"provider\": \"openai\",\n    \"model\": \"gpt-4o\",\n    \"systemPrompt\": \"{{ $('Generate VAPI Prompt').item.json.choices[0].message.content }}\"\n  },\n  \"voice\": {\n    \"provider\": \"11labs\",\n    \"voiceId\": \"21m00Tcm4TlvDq8ikWAM\"\n  },\n  \"firstMessage\": \"Ciao! Sono Sofia, l'assistente virtuale di {{ $('Webhook Trigger').item.json.body.business_name }}. Come posso aiutarti oggi?\",\n  \"language\": \"it-IT\"\n}",
+        "options": {}
+      },
+      "id": "create-vapi-assistant",
+      "name": "Create VAPI Assistant",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $env.NEXT_PUBLIC_SITE_URL }}/api/n8n/update-tenant",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"tenant_id\": \"{{ $('Webhook Trigger').item.json.body.tenant_id }}\",\n  \"vapi_assistant_id\": \"{{ $('Create VAPI Assistant').item.json.id }}\",\n  \"system_prompt\": \"{{ $('Generate VAPI Prompt').item.json.choices[0].message.content }}\",\n  \"is_active\": false\n}",
+        "options": {}
+      },
+      "id": "update-supabase",
+      "name": "Update Supabase Agent Config",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.RESEND_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"from\": \"Flowstart AI <onboarding@flowstart.it>\",\n  \"to\": [\"{{ $('Webhook Trigger').item.json.body.customer_email }}\"],\n  \"subject\": \"Benvenuto in Flowstart AI — Il tuo agente è in configurazione\",\n  \"html\": \"<h1>Benvenuto in Flowstart AI</h1><p>Ciao,</p><p>il tuo assistente AI <strong>Sofia</strong> è in fase di configurazione per <strong>{{ $('Webhook Trigger').item.json.body.business_name }}</strong>.</p><p>Il nostro team ti contatterà entro 24 ore per completare la configurazione e attivare il tuo numero di telefono dedicato.</p><p>Nel frattempo puoi accedere al tuo pannello:</p><p><a href='{{ $env.NEXT_PUBLIC_SITE_URL }}/dashboard'>Accedi al pannello →</a></p><p>A presto,<br>Il team Flowstart AI</p>\"\n}",
+        "options": {}
+      },
+      "id": "send-welcome-email",
+      "name": "Send Welcome Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 380]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.RESEND_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"from\": \"Flowstart AI <team@flowstart.it>\",\n  \"to\": [\"hello@flowstart.it\"],\n  \"subject\": \"Nuovo cliente: {{ $('Webhook Trigger').item.json.body.business_name }}\",\n  \"html\": \"<h2>Nuovo cliente onboarding</h2><ul><li><strong>Business:</strong> {{ $('Webhook Trigger').item.json.body.business_name }}</li><li><strong>Piano:</strong> {{ $('Webhook Trigger').item.json.body.plan }}</li><li><strong>Email:</strong> {{ $('Webhook Trigger').item.json.body.customer_email }}</li><li><strong>Tenant ID:</strong> {{ $('Webhook Trigger').item.json.body.tenant_id }}</li><li><strong>VAPI ID:</strong> {{ $('Create VAPI Assistant').item.json.id }}</li></ul><p><strong>Azione richiesta:</strong> Assegnare numero di telefono e attivare agente.</p>\"\n}",
+        "options": {}
+      },
+      "id": "notify-team",
+      "name": "Notify Flowstart Team",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"success\": true, \"message\": \"Onboarding initiated\" }"
+      },
+      "id": "respond-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1340, 380]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [[{ "node": "Check Event Type", "type": "main", "index": 0 }]]
+    },
+    "Check Event Type": {
+      "main": [
+        [{ "node": "Generate VAPI Prompt", "type": "main", "index": 0 }],
+        []
+      ]
+    },
+    "Generate VAPI Prompt": {
+      "main": [[{ "node": "Create VAPI Assistant", "type": "main", "index": 0 }]]
+    },
+    "Create VAPI Assistant": {
+      "main": [[
+        { "node": "Update Supabase Agent Config", "type": "main", "index": 0 },
+        { "node": "Send Welcome Email", "type": "main", "index": 0 }
+      ]]
+    },
+    "Update Supabase Agent Config": {
+      "main": [[{ "node": "Notify Flowstart Team", "type": "main", "index": 0 }]]
+    },
+    "Notify Flowstart Team": {
+      "main": [[{ "node": "Respond to Webhook", "type": "main", "index": 0 }]]
+    }
+  }
+}
