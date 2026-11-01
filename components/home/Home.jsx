@@ -34,7 +34,7 @@ const T = {
     ],
 
     workH: 'Progetti veri, online e funzionanti.',
-    workP: 'Dal 2025 ho pubblicato dieci prodotti, dai siti per attività locali alle app con intelligenza artificiale. Questi tre mostrano meglio cosa faccio.',
+    workP: 'Dal 2025 ho pubblicato dieci prodotti, dai siti per attività locali alle app con intelligenza artificiale. Questi tre mostrano meglio cosa faccio, e il quarto è quello su cui lavoro adesso.',
     cases: {
       flow: {
         title: 'Flowstart AI',
@@ -51,6 +51,16 @@ const T = {
         link: 'Apri il sito',
         sub: 'Massaggi e benessere, Bojano',
         btn: 'Prenota ora',
+      },
+      schema: {
+        status: 'In sviluppo',
+        desc: 'Un’API per chi automatizza senza programmare: ripulisce i dati che passano tra Zapier, Make, Airtable e Typeform, e quando qualcosa non va spiega l’errore in parole semplici.',
+        bullets: ['Ricette pronte per coppie di strumenti, come Typeform verso Airtable', 'Errori spiegati in italiano e in inglese, non codice', 'Abbonamento e accesso senza passare da me'],
+        link: 'Avvisami quando è pronto',
+        mailSubject: 'Lista d’attesa Schemabot',
+        diffTitle: 'Typeform verso Airtable',
+        fields: [['telefono', '"351 754 64 55 "', '"+393517546455"'], ['data', '"12/03/26"', '"2026-03-12"'], ['newsletter', '"Sì"', 'true']],
+        note: 'La data era scritta giorno/mese/anno: l’ho convertita nel formato che Airtable accetta.',
       },
       bridge: {
         desc: 'App che legge i documenti della burocrazia europea e li spiega agli immigrati in parole semplici.',
@@ -192,7 +202,7 @@ const T = {
     ],
 
     workH: 'Real projects, live and working.',
-    workP: 'Since 2025 I’ve shipped ten products, from local business sites to AI apps. These three show best what I do.',
+    workP: 'Since 2025 I’ve shipped ten products, from local business sites to AI apps. These three show best what I do, and the fourth is what I’m building now.',
     cases: {
       flow: {
         title: 'Flowstart AI',
@@ -209,6 +219,16 @@ const T = {
         link: 'Open the site',
         sub: 'Massage and wellness, Bojano',
         btn: 'Book now',
+      },
+      schema: {
+        status: 'In progress',
+        desc: 'An API for people who automate without code: it cleans the data moving between Zapier, Make, Airtable and Typeform, and when something breaks it explains the error in plain words.',
+        bullets: ['Ready-made recipes for tool pairs, like Typeform to Airtable', 'Errors explained in plain English or Italian, not code', 'Self-serve subscription and access'],
+        link: 'Tell me when it’s ready',
+        mailSubject: 'Schemabot waitlist',
+        diffTitle: 'Typeform to Airtable',
+        fields: [['phone', '"351 754 64 55 "', '"+393517546455"'], ['date', '"12/03/26"', '"2026-03-12"'], ['newsletter', '"Yes"', 'true']],
+        note: 'The date was written day/month/year, so I converted it to the format Airtable accepts.',
       },
       bridge: {
         desc: 'An app that reads European bureaucracy documents and explains them to immigrants in plain words.',
@@ -525,6 +545,29 @@ export default function Home({ fontClass = '' }) {
                 </div>
               </article>
             </div>
+
+            <article className="case wip">
+              <div className="visual v-diff" aria-hidden="true">
+                <div className="diff">
+                  <div className="diff-top">{c.cases.schema.diffTitle}</div>
+                  {c.cases.schema.fields.map(([k, bad, good]) => (
+                    <div className="diff-row" key={k}>
+                      <span className="k">{k}</span>
+                      <s>{bad}</s>
+                      <b>{good}</b>
+                    </div>
+                  ))}
+                  <p className="diff-note">{c.cases.schema.note}</p>
+                </div>
+              </div>
+              <div className="case-body">
+                <div className="case-meta"><span className="status">{c.cases.schema.status}</span><span>Cloudflare Workers</span><span>Zod</span><span>API</span></div>
+                <h3>Schemabot</h3>
+                <p>{c.cases.schema.desc}</p>
+                <ul>{c.cases.schema.bullets.map((b) => <li key={b}>{b}</li>)}</ul>
+                <a className="case-link" href={`mailto:${EMAIL}?subject=${encodeURIComponent(c.cases.schema.mailSubject)}`}>{c.cases.schema.link}</a>
+              </div>
+            </article>
           </div>
         </section>
 
