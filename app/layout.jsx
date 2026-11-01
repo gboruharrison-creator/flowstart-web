@@ -5,18 +5,18 @@ import CookieBanner from '../components/CookieBanner';
 
 export const metadata = {
   title: {
-    default: 'Flowstart — Presenza online e assistenti AI per PMI',
+    default: 'Flowstart — Siti web, software e assistenti AI per PMI',
     template: '%s | Flowstart',
   },
   description:
-    'Ti facciamo trovare su Google (scheda, sito, WhatsApp) e aggiungiamo un assistente AI che risponde a chiamate e messaggi e prenota appuntamenti. Audit gratuito.',
+    'Siti web, e-commerce e software su misura, presenza su Google e assistenti AI che rispondono a chiamate e messaggi. Audit gratuito.',
   metadataBase: new URL('https://www.flowstart.it'),
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
   },
   openGraph: {
-    title: 'Flowstart — Presenza online e assistenti AI',
+    title: 'Flowstart — Siti web, software e assistenti AI',
     description: 'Ti trovano su Google. Ti rispondono anche quando sei occupato. Audit gratuito.',
     url: 'https://www.flowstart.it',
     siteName: 'Flowstart',
@@ -26,7 +26,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Flowstart',
-    description: 'Presenza online e assistenti AI per PMI italiane.',
+    description: 'Siti web, software e assistenti AI per PMI italiane.',
   },
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://www.flowstart.it' },

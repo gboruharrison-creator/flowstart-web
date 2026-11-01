@@ -13,11 +13,11 @@ const t = {
     nav_about: 'Chi siamo',
     nav_cta: 'Audit gratuito',
 
-    hero_label: 'Presenza online + Assistenti AI per PMI',
+    hero_label: 'Siti web · Software · Assistenti AI per PMI',
     hero_h1_line1: 'Ti trovano su Google.',
     hero_h1_line2: 'Ti rispondono anche quando sei occupato.',
     hero_sub:
-      'Flowstart sistema la tua presenza online (scheda Google, sito, WhatsApp) e poi aggiunge un assistente AI che risponde a chiamate e messaggi, prenota appuntamenti e non perde clienti fuori orario.',
+      'Flowstart costruisce siti web e software per la tua attività, ti fa trovare su Google e aggiunge un assistente AI che risponde a chiamate e messaggi, prenota appuntamenti e non perde clienti fuori orario.',
     hero_cta_primary: 'Chiedi l’audit gratuito',
     hero_cta_secondary: 'Prenota una chiamata',
     hero_note: 'Audit su WhatsApp, senza impegno. Rispondiamo in giornata.',
@@ -34,11 +34,11 @@ const t = {
     ],
 
     services_label: 'Cosa facciamo',
-    services_title: 'Due passi. Un solo referente.',
+    services_title: 'Tre servizi. Un solo referente.',
     services_sub:
-      'Prima ti facciamo trovare. Poi facciamo in modo che nessun cliente resti senza risposta. Puoi partire da uno dei due e aggiungere l’altro quando vuoi.',
+      'Ti facciamo trovare, facciamo in modo che nessun cliente resti senza risposta e, quando serve, costruiamo il software su misura. Parti da quello che ti serve e aggiungi il resto quando vuoi.',
 
-    s1_tag: 'Passo 1 · Pronto Online',
+    s1_tag: '01 · Pronto Online',
     s1_title: 'Fatti trovare',
     s1_desc:
       'Tutto quello che serve perché un cliente ti trovi su Google e ti contatti in pochi secondi.',
@@ -49,7 +49,7 @@ const t = {
       'Richiesta recensioni ai clienti soddisfatti',
     ],
 
-    s2_tag: 'Passo 2 · Flowstart AI',
+    s2_tag: '02 · Flowstart AI',
     s2_title: 'Rispondi sempre',
     s2_desc:
       'Un assistente AI in italiano che lavora dentro i tuoi processi, 24 ore su 24.',
@@ -58,6 +58,17 @@ const t = {
       'Assistente per WhatsApp e sito',
       'Prenotazioni e promemoria automatici',
       'Automazioni per il lavoro ripetitivo',
+    ],
+
+    s3_tag: '03 · Sviluppo',
+    s3_title: 'Costruiamo su misura',
+    s3_desc:
+      'Siti web e software pensati per come lavori tu, non modelli già pronti.',
+    s3_items: [
+      'Siti web aziendali e landing page',
+      'E-commerce (Shopify o su misura)',
+      'Web app, gestionali e aree clienti',
+      'Integrazioni: pagamenti, CRM, fatturazione',
     ],
 
     agency_title: 'Sei un’agenzia?',
@@ -136,7 +147,7 @@ const t = {
     modal_email: 'Email',
     modal_email_ph: 'mario@tuaattivita.it',
     modal_interest: 'Cosa ti interessa?',
-    modal_interest_opts: ['Farmi trovare online', 'Assistente AI', 'Entrambi', 'Non lo so ancora'],
+    modal_interest_opts: ['Farmi trovare online', 'Sito web / e-commerce', 'Software o app su misura', 'Assistente AI', 'Più servizi', 'Non lo so ancora'],
     modal_type: 'Tipo di attività',
     modal_type_ph: 'Seleziona...',
     modal_pain: 'Dove perdi più clienti o tempo? (opzionale)',
@@ -167,11 +178,11 @@ const t = {
     nav_about: 'About',
     nav_cta: 'Free audit',
 
-    hero_label: 'Online presence + AI assistants for small businesses',
+    hero_label: 'Websites · Software · AI assistants for small businesses',
     hero_h1_line1: 'Customers find you on Google.',
     hero_h1_line2: 'They get an answer even when you’re busy.',
     hero_sub:
-      'Flowstart fixes your online presence (Google profile, website, WhatsApp), then adds an AI assistant that answers calls and messages, books appointments and stops you losing customers after hours.',
+      'Flowstart builds websites and software for your business, gets you found on Google and adds an AI assistant that answers calls and messages, books appointments and stops you losing customers after hours.',
     hero_cta_primary: 'Get the free audit',
     hero_cta_secondary: 'Book a call',
     hero_note: 'Audit over WhatsApp, no strings attached. We reply the same day.',
@@ -188,11 +199,11 @@ const t = {
     ],
 
     services_label: 'What we do',
-    services_title: 'Two steps. One point of contact.',
+    services_title: 'Three services. One point of contact.',
     services_sub:
-      'First we get you found. Then we make sure no customer goes unanswered. Start with either and add the other whenever you like.',
+      'We get you found, make sure no customer goes unanswered and, when you need it, build custom software. Start with what you need and add the rest whenever you like.',
 
-    s1_tag: 'Step 1 · Pronto Online',
+    s1_tag: '01 · Pronto Online',
     s1_title: 'Get found',
     s1_desc:
       'Everything a customer needs to find you on Google and contact you in seconds.',
@@ -203,7 +214,7 @@ const t = {
       'Review requests to happy customers',
     ],
 
-    s2_tag: 'Step 2 · Flowstart AI',
+    s2_tag: '02 · Flowstart AI',
     s2_title: 'Always answer',
     s2_desc:
       'An AI assistant in Italian and English that works inside your processes, 24/7.',
@@ -212,6 +223,17 @@ const t = {
       'Assistant for WhatsApp and your website',
       'Automatic bookings and reminders',
       'Automations for repetitive work',
+    ],
+
+    s3_tag: '03 · Development',
+    s3_title: 'Built for you',
+    s3_desc:
+      'Websites and software designed around how you work, not off-the-shelf templates.',
+    s3_items: [
+      'Business websites and landing pages',
+      'E-commerce (Shopify or custom)',
+      'Web apps, management tools and client portals',
+      'Integrations: payments, CRM, invoicing',
     ],
 
     agency_title: 'Are you an agency?',
@@ -289,7 +311,7 @@ const t = {
     modal_email: 'Email',
     modal_email_ph: 'mario@yourbusiness.it',
     modal_interest: 'What are you interested in?',
-    modal_interest_opts: ['Getting found online', 'AI assistant', 'Both', 'Not sure yet'],
+    modal_interest_opts: ['Getting found online', 'Website / e-commerce', 'Custom software or app', 'AI assistant', 'Several services', 'Not sure yet'],
     modal_type: 'Business type',
     modal_type_ph: 'Select...',
     modal_pain: 'Where do you lose most customers or time? (optional)',
@@ -482,10 +504,11 @@ export default function LandingPage() {
             <p className="text-slate-400 text-base leading-relaxed">{c.services_sub}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               { tag: c.s1_tag, title: c.s1_title, desc: c.s1_desc, items: c.s1_items, accent: false },
               { tag: c.s2_tag, title: c.s2_title, desc: c.s2_desc, items: c.s2_items, accent: true },
+              { tag: c.s3_tag, title: c.s3_title, desc: c.s3_desc, items: c.s3_items, accent: false },
             ].map(({ tag, title, desc, items, accent }) => (
               <div
                 key={tag}
