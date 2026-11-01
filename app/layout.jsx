@@ -5,28 +5,28 @@ import CookieBanner from '../components/CookieBanner';
 
 export const metadata = {
   title: {
-    default: 'Flowstart AI — Agentic Infrastructure per PMI Italiane',
-    template: '%s | Flowstart AI',
+    default: 'Flowstart — Presenza online e assistenti AI per PMI',
+    template: '%s | Flowstart',
   },
   description:
-    'Software Robot che rispondono alle chiamate, prenotano appuntamenti ed eliminano lavoro ripetitivo. Attivi in 7 giorni.',
+    'Ti facciamo trovare su Google (scheda, sito, WhatsApp) e aggiungiamo un assistente AI che risponde a chiamate e messaggi e prenota appuntamenti. Audit gratuito.',
   metadataBase: new URL('https://www.flowstart.it'),
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
   },
   openGraph: {
-    title: 'Flowstart AI — Agentic Infrastructure',
-    description: 'Software Robot per PMI italiane. Attivi in 7 giorni.',
+    title: 'Flowstart — Presenza online e assistenti AI',
+    description: 'Ti trovano su Google. Ti rispondono anche quando sei occupato. Audit gratuito.',
     url: 'https://www.flowstart.it',
-    siteName: 'Flowstart AI',
+    siteName: 'Flowstart',
     locale: 'it_IT',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Flowstart AI',
-    description: 'Software Robot per PMI italiane.',
+    title: 'Flowstart',
+    description: 'Presenza online e assistenti AI per PMI italiane.',
   },
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://www.flowstart.it' },
