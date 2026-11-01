@@ -76,6 +76,23 @@ const t = {
       'Offri gli assistenti Flowstart ai tuoi clienti con il tuo marchio. Tecnologia nostra, relazione tua.',
     agency_cta: 'Parliamone →',
 
+    nav_work: 'Progetti',
+    work_label: 'Progetti',
+    work_title: 'Software che usiamo davvero.',
+    work_sub: 'Il primo progetto è la nostra stessa piattaforma: la stessa tecnologia che portiamo ai clienti.',
+    work_tag: 'Piattaforma SaaS · Sviluppo interno',
+    work_name: 'Flowstart AI',
+    work_desc:
+      'Piattaforma multi-cliente per gestire assistenti AI: ogni attività ha la sua area riservata, vede chiamate e prenotazioni in tempo reale e paga con abbonamento online.',
+    work_points: [
+      'Area clienti con login e dashboard in tempo reale',
+      'Agenti vocali collegati al numero dell’attività',
+      'Abbonamenti e pagamenti online con Stripe',
+      'Automazioni tra sistemi con n8n',
+    ],
+    work_more: 'Altri progetti e demo su richiesta.',
+    work_link: 'Area clienti →',
+
     how_label: 'Metodo',
     how_title: 'Operativi in circa 7 giorni.',
     how_sub:
@@ -240,6 +257,23 @@ const t = {
     agency_desc:
       'Offer Flowstart assistants to your clients under your own brand. Our technology, your relationship.',
     agency_cta: 'Let’s talk →',
+
+    nav_work: 'Work',
+    work_label: 'Work',
+    work_title: 'Software we actually use.',
+    work_sub: 'Our first project is our own platform: the same technology we bring to clients.',
+    work_tag: 'SaaS platform · In-house build',
+    work_name: 'Flowstart AI',
+    work_desc:
+      'A multi-client platform for running AI assistants: each business gets its own private area, sees calls and bookings in real time and pays by online subscription.',
+    work_points: [
+      'Client area with login and real-time dashboard',
+      'Voice agents connected to the business’s number',
+      'Online subscriptions and payments with Stripe',
+      'Cross-system automations with n8n',
+    ],
+    work_more: 'More projects and demos on request.',
+    work_link: 'Client area →',
 
     how_label: 'Method',
     how_title: 'Live in about 7 days.',
@@ -417,6 +451,7 @@ export default function LandingPage() {
 
           <div className="hidden md:flex items-center gap-6">
             <a href="#services" className="text-slate-400 hover:text-white text-sm transition-colors">{c.nav_services}</a>
+            <a href="#work" className="text-slate-400 hover:text-white text-sm transition-colors">{c.nav_work}</a>
             <a href="#how" className="text-slate-400 hover:text-white text-sm transition-colors">{c.nav_method}</a>
             <a href="#about" className="text-slate-400 hover:text-white text-sm transition-colors">{c.nav_about}</a>
           </div>
@@ -548,8 +583,88 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ─── WORK ─── */}
+      <section id="work" className="py-24 md:py-32 px-6 border-t border-white/[0.06]" style={{ background: '#080e1a' }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-14 max-w-2xl">
+            <SectionLabel>{c.work_label}</SectionLabel>
+            <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight mb-4">{c.work_title}</h2>
+            <p className="text-slate-400 text-base leading-relaxed">{c.work_sub}</p>
+          </div>
+
+          <div className="rounded-2xl border border-white/[0.08] bg-[#0b1222] overflow-hidden grid grid-cols-1 lg:grid-cols-[1fr_1.1fr]">
+            <div className="p-7 md:p-10">
+              <div className="text-emerald-400 text-xs font-mono font-medium mb-5">{c.work_tag}</div>
+              <h3 className="text-white font-semibold text-2xl md:text-3xl tracking-tight mb-4">{c.work_name}</h3>
+              <p className="text-slate-400 text-sm md:text-base leading-relaxed mb-6">{c.work_desc}</p>
+              <ul className="space-y-3 mb-8">
+                {c.work_points.map((it) => (
+                  <li key={it} className="flex items-start gap-3 text-sm text-slate-300">
+                    <span className="mt-0.5"><Check ok /></span>
+                    {it}
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-wrap gap-2 mb-8">
+                {['Next.js', 'Supabase', 'Stripe', 'Vapi', 'n8n', 'Vercel'].map((tech) => (
+                  <span key={tech} className="text-[11px] font-mono text-slate-400 border border-white/[0.08] rounded-md px-2 py-1">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <Link href="/login" className="text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors">
+                  {c.work_link}
+                </Link>
+                <span className="text-slate-500 text-xs">{c.work_more}</span>
+              </div>
+            </div>
+
+            {/* Dashboard mock */}
+            <div className="border-t lg:border-t-0 lg:border-l border-white/[0.06] p-6 md:p-8 flex items-center" aria-hidden="true">
+              <div className="w-full rounded-xl border border-white/[0.08] bg-[#0f172a] overflow-hidden">
+                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/[0.06]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                  <span className="ml-3 text-[11px] font-mono text-slate-500">flowstart.it/dashboard</span>
+                </div>
+                <div className="p-5 space-y-4">
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      [lang === 'it' ? 'Chiamate' : 'Calls', 'w-10'],
+                      [lang === 'it' ? 'Prenotazioni' : 'Bookings', 'w-8'],
+                      [lang === 'it' ? 'Fuori orario' : 'After hours', 'w-6'],
+                    ].map(([label, w]) => (
+                      <div key={label} className="rounded-lg border border-white/[0.06] p-3">
+                        <div className="text-[10px] text-slate-500 mb-2 truncate">{label}</div>
+                        <div className={`h-2.5 ${w} rounded bg-emerald-500/60`} />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="rounded-lg border border-white/[0.06] p-4">
+                    <div className="flex items-end gap-1.5 h-20">
+                      {[30, 45, 38, 60, 52, 70, 64, 80, 58, 74, 88, 76].map((h, i) => (
+                        <div key={i} className="flex-1 rounded-sm bg-emerald-500/30" style={{ height: `${h}%` }} />
+                      ))}
+                    </div>
+                  </div>
+                  {[0, 1, 2].map((i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <span className="w-6 h-6 rounded-full bg-white/[0.06] flex-shrink-0" />
+                      <span className="h-2 flex-1 rounded bg-white/[0.06]" />
+                      <span className="h-2 w-10 rounded bg-emerald-500/30" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ─── HOW IT WORKS ─── */}
-      <section id="how" className="py-24 md:py-32 px-6 border-t border-white/[0.06]" style={{ background: '#080e1a' }}>
+      <section id="how" className="py-24 md:py-32 px-6 border-t border-white/[0.06]">
         <div className="max-w-6xl mx-auto">
           <div className="mb-14">
             <SectionLabel>{c.how_label}</SectionLabel>
@@ -570,7 +685,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── PRINCIPLES ─── */}
-      <section id="principles" className="py-24 md:py-32 px-6 border-t border-white/[0.06]">
+      <section id="principles" className="py-24 md:py-32 px-6 border-t border-white/[0.06]" style={{ background: '#080e1a' }}>
         <div className="max-w-6xl mx-auto">
           <div className="mb-14">
             <SectionLabel>{c.principles_label}</SectionLabel>
@@ -588,7 +703,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── ABOUT ─── */}
-      <section id="about" className="py-24 md:py-32 px-6 border-t border-white/[0.06]" style={{ background: '#080e1a' }}>
+      <section id="about" className="py-24 md:py-32 px-6 border-t border-white/[0.06]">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[auto_1fr] gap-10 md:gap-16 items-start">
           <div
             className="w-28 h-28 md:w-36 md:h-36 rounded-2xl border border-white/[0.08] bg-[#0b1222] flex items-center justify-center"
@@ -613,7 +728,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── CTA ─── */}
-      <section id="cta" className="py-24 md:py-32 px-6 border-t border-white/[0.06]">
+      <section id="cta" className="py-24 md:py-32 px-6 border-t border-white/[0.06]" style={{ background: '#080e1a' }}>
         <div className="max-w-6xl mx-auto">
           <div className="max-w-xl">
             <SectionLabel>{c.cta_label}</SectionLabel>
@@ -642,7 +757,7 @@ export default function LandingPage() {
 
       {/* ─── CALENDLY (only if configured) ─── */}
       {calendlyUrl && (
-        <section id="calendly" className="py-24 md:py-32 px-6 border-t border-white/[0.06]" style={{ background: '#080e1a' }}>
+        <section id="calendly" className="py-24 md:py-32 px-6 border-t border-white/[0.06]">
           <div className="max-w-6xl mx-auto">
             <div className="mb-12">
               <p className="text-slate-500 text-xs font-medium uppercase tracking-widest mb-3">Discovery call</p>
